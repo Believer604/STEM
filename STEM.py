@@ -240,8 +240,8 @@ def stacking1(X_train, y_train, X_test, y_test, seed, name = 'stacking'):
         'boosting_type':  'gbdt',#'rf'
         'num_leaves': 31,
         'learning_rate': 0.1,
-        'feature_fraction': 0.9
-        #'n_estimators': 50
+        'feature_fraction': 0.9,
+        'n_estimators': 200
     }
 
     # Train the LightGBM model
@@ -253,10 +253,10 @@ def stacking1(X_train, y_train, X_test, y_test, seed, name = 'stacking'):
     lgb_model = lgb.train(params, lgb_train, num_round)
 
     # Train Random Forest
-    rf_model = RandomForestClassifier(n_estimators = 120, max_depth = 17,  random_state=42)
+    rf_model = RandomForestClassifier(n_estimators = 120, max_depth = 17, min samples split = 2, min samples leaf = 1)
     rf_model.fit(X_, y_)
 
-    reg_model = ExtraTreesClassifier(n_estimators=350, random_state=42)
+    reg_model = ExtraTreesClassifier(n_estimators=350,  criterion = 'gini' , min samples split =  2, min samples leaf =  1)
     reg_model.fit(X_,y_)
 
 
@@ -548,28 +548,24 @@ from xgboost import XGBClassifier
 from joblib import dump, load
 
 config = {
-    'data_path': 'add_path_here',
+    
     'save_path': 'model_save',
     'log_path' : 'log',
-    'dataset_type': ['classification', 'regression'][0],
-    'is_multitask': [0,1][0],
+    'dataset_type': ['classification']
     'task_num':1,
-    'split_type': ['random', 'scaffold'][0],
-    'split_ratio': [0.8,0.1,0.1],
     'val_path': 'outputs',
     'test_path':'outputs',
     'seed':0,
     'num_folds':1,
     'metric': None,
-    'epochs':10,
+    'epochs':100,
     'batch_size':32,
-    'fp_type': ['morgan','mixed'][1],
     'hidden_size': 300,
     'fp_2_dim':512,
     'nhid':60,
     'nheads':8,
     'gat_scale':0.5,
-    'dropout':0.0,
+    'dropout':0.2,
     'dropout_gat':0.0,
     'predict_path':'outputs',
     'result_path':'result.txt',
