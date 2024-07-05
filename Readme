@@ -3,8 +3,9 @@ STEM.py Usage Instructions
 Notebook Execution:
 
 Open the STEM.ipynb Jupyter Notebook.
-Run the notebook cells sequentially by pressing Shift + Enter.
-Ensure to supply the required data files to the load_data2 function.
+Run the notebook cells sequentially. Ensure to supply the required data files to the load_data2 function.
 
-Data Source:
-The data files provided contain sample data only. For the full dataset, you can collect additional data from the Padel and Mordred libraries.
+Dataset:
+ Hansen benchmark dataset : http://doc.ml.tu-berlin.de/toxbenchmark/
+ Xu dataset: https://biosig.lab.uq.edu.au/toxcsm/data
+
